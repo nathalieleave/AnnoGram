@@ -21,13 +21,13 @@ function handleButtonClick() {
 function handleButtonClick() {
   // Use stored sync value.
   chrome.storage.sync.get("title", ({ title }) => {
-    alert(title);
+    //alert(title);
   });
   chrome.storage.sync.get("url", ({ url }) => {
-    alert(url);
+    //alert(url);
   });
   chrome.storage.sync.get("summary", ({ summary }) => {
-    alert(summary);
+    //alert(summary);
   });
   return { title, url, summary };
 }
@@ -55,7 +55,9 @@ function documentEvents2() {
       target: { tabId: tab.id },
       function: handleButtonClick,
     });
+    window.location.href = "menu.html";
   });
+  //chrome.browserAction.setPopup({ popup: "menu.html" });
 }
 
 //module.exports = handleButtonClick;
