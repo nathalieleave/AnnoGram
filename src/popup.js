@@ -1,24 +1,41 @@
-// Initialize button with user's preferred color
-let changeColor = document.getElementById("changeColor");
+//Below outputs the given input
+/*document.addEventListener("DOMContentLoaded", documentEvents, false);
 
-chrome.storage.sync.get("color", ({ color }) => {
-  changeColor.style.backgroundColor = color;
-});
+function myAction(input) {
+  console.log("input value is : " + input.value);
+  alert("The entered data is : " + input.value);
+}
 
-// When the button is clicked, inject setPageBackgroundColor into current page
-changeColor.addEventListener("click", async () => {
-  let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    function: setPageBackgroundColor,
+function documentEvents() {
+  document.getElementById("save").addEventListener("click", function () {
+    myAction(document.getElementById("title"));
   });
-});
+}
+function handleButtonClick() {
+  // Use stored sync value.
+  chrome.storage.sync.get("title", ({ title }) => {
+    alert(title);
+  });
+}*/
 
-// The body of this function will be executed as a content script inside the
-// current page
-function setPageBackgroundColor() {
-  chrome.storage.sync.get("color", ({ color }) => {
-    document.body.style.backgroundColor = color;
+function handleButtonClick() {
+  // Use stored sync value.
+  chrome.storage.sync.get("title", ({ title }) => {
+    alert(title);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", documentEvents2, false);
+function documentEvents2() {
+  document.getElementById("save").addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+    // Store sync value before the script is executed.
+    let title = document.getElementById("title").value;
+    chrome.storage.sync.set({ title });
+    chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: handleButtonClick,
+    });
   });
 }
