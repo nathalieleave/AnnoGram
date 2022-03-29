@@ -23,19 +23,39 @@ function handleButtonClick() {
   chrome.storage.sync.get("title", ({ title }) => {
     alert(title);
   });
+  chrome.storage.sync.get("url", ({ url }) => {
+    alert(url);
+  });
+  chrome.storage.sync.get("summary", ({ summary }) => {
+    alert(summary);
+  });
+  return { title, url, summary };
 }
 
 document.addEventListener("DOMContentLoaded", documentEvents2, false);
 function documentEvents2() {
   document.getElementById("save").addEventListener("click", async () => {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
     // Store sync value before the script is executed.
     let title = document.getElementById("title").value;
     chrome.storage.sync.set({ title });
+    /*chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: handleButtonClick,
+    });*/
+    let url = document.getElementById("url").value;
+    chrome.storage.sync.set({ url });
+    /*chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      function: handleButtonClick,
+    });*/
+    let summary = document.getElementById("summary").value;
+    chrome.storage.sync.set({ summary });
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       function: handleButtonClick,
     });
   });
 }
+
+//module.exports = handleButtonClick;
