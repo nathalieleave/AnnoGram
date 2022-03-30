@@ -1,0 +1,24 @@
+{
+  "name": "annogram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathalieleave/AnnoGram.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathalieleave/AnnoGram/issues"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1"
+  },
+  "homepage": "https://github.com/nathalieleave/AnnoGram#readme"
+}
