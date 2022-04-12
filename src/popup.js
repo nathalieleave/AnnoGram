@@ -22,13 +22,13 @@ function handleButtonClick() {
 function handleButtonClick() {
   // Use stored sync value.
   chrome.storage.sync.get("title", ({ title }) => {
-    //alert(title);
+    alert(title);
   });
   chrome.storage.sync.get("url", ({ url }) => {
-    //alert(url);
+    alert(url);
   });
   chrome.storage.sync.get("summary", ({ summary }) => {
-    //alert(summary);
+    alert(summary);
   });
 }
 
@@ -52,3 +52,24 @@ function documentEvents2() {
 }
 //export default handleButtonClick;
 //module.exports = handleButtonClick;
+
+/*
+var context_id = -1;
+
+chrome.input.ime.onFocus.addListener(function(context) {
+  context_id = context.contextID;
+});
+
+chrome.input.ime.onKeyEvent.addListener(
+  function(engineID, keyData) {
+    if (keyData.type == "keydown" && keyData.key.match(/^[a-z]$/)) {
+      chrome.input.ime.commitText({"contextID": context_id,
+                                    "text": keyData.key.toUpperCase()});
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+);
+*/
