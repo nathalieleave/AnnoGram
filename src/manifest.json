@@ -7,7 +7,7 @@
     "service_worker": "background.js"
   },
   "options_page": "options.html",
-  "permissions": ["storage", "activeTab", "scripting", "tabs", "activeTab"],
+  "permissions": ["storage", "activeTab", "scripting", "tabs", "activeTab", "input"],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
