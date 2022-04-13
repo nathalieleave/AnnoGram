@@ -15,8 +15,5 @@ function newFileFunction(){
 }
 document.addEventListener("DOMContentLoaded", newFileFunction, false);
 
-
-
-
 //export default handleButtonClick;
 //module.exports = handleButtonClick;
