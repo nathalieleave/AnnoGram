@@ -1,54 +1,22 @@
-//Below outputs the given input
-/*document.addEventListener("DOMContentLoaded", documentEvents, false);
 
-function myAction(input) {
-  console.log("input value is : " + input.value);
-  alert("The entered data is : " + input.value);
-}
+//document.getElementById("File_1").addEventListener("click", myFunction);
 
-function documentEvents() {
-  document.getElementById("save").addEventListener("click", function () {
-    myAction(document.getElementById("title"));
-  });
-}
-function handleButtonClick() {
-  // Use stored sync value.
-  chrome.storage.sync.get("title", ({ title }) => {
-    alert(title);
-  });
-}*/
+chrome.storage.sync.get(['titleKey'], function(result){
+  if(result.titleKey != null){
+    document.querySelector('#File_1').textContent = result.titleKey;
+  }
+});
 
-//TEST: handleButtonClick should return the userinput from chrome storage
-function handleButtonClick() {
-  // Use stored sync value.
-  chrome.storage.sync.get("title", ({ title }) => {
-    //alert(title);
-  });
-  chrome.storage.sync.get("url", ({ url }) => {
-    //alert(url);
-  });
-  chrome.storage.sync.get("summary", ({ summary }) => {
-    //alert(summary);
+function newFileFunction(){
+  document.getElementById("New File").addEventListener("click", async () =>{
+    let[tab] = await chrome.tabs.query({active:true, currentWindow: true});
+    window.location.href = "menu.html";
   });
 }
+document.addEventListener("DOMContentLoaded", newFileFunction, false);
 
-document.addEventListener("DOMContentLoaded", documentEvents2, false);
-function documentEvents2() {
-  document.getElementById("save").addEventListener("click", async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    // Store sync value before the script is executed.
-    let title = document.getElementById("title").value;
-    chrome.storage.sync.set({ title });
-    let url = document.getElementById("url").value;
-    chrome.storage.sync.set({ url });
-    let summary = document.getElementById("summary").value;
-    chrome.storage.sync.set({ summary });
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: handleButtonClick,
-    });
-    window.location.href = "menu.html"; //opens new page after data is stored
-  });
-}
+
+
+
 //export default handleButtonClick;
 //module.exports = handleButtonClick;
