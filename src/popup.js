@@ -12,10 +12,11 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
   }
 });
 */
-
+//let title1 = document.querySelector("#File_1").textContent;
 chrome.storage.sync.get(["titleKey"], function (result) {
   if (result.titleKey != null) {
     document.querySelector("#File_1").textContent = result.titleKey;
+    //title1 = document.querySelector("#File_1").textContent;
   }
 });
 

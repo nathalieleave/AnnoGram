@@ -11,7 +11,7 @@
 
   <body>
     <div class="container my-3">
-      <h1></h1>
+      <h1>Notes</h1>
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Add a Note</h5>
@@ -20,7 +20,7 @@
           </div>
           <button
             class="btn btn-primary"
-            id="addBtn"
+            id="subnote"
             style="background-color: pink"
           >
             Add Note
@@ -28,10 +28,11 @@
         </div>
       </div>
       <hr />
-      <h1>Your Notes</h1>
+      <h1 id="currentNotes">Your Notes</h1>
       <hr />
 
       <div id="notes" class="row container-fluid"></div>
     </div>
+    <script src="textEditor.js"></script>
   </body>
 </html>
