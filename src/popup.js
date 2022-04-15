@@ -1,4 +1,3 @@
-
 //document.getElementById("File_1").addEventListener("click", myFunction);
 //make a global array (or map w btn id) that stores each unique titleKey when its changed, so as to change the buttons when necessary (file1,file2, etc);
 //https://developer.chrome.com/docs/extensions/reference/storage/ (asynch preload from storage);
@@ -14,16 +13,15 @@ chrome.storage.onChanged.addListener(function (changes, namespace) {
 });
 */
 
-chrome.storage.sync.get(['titleKey'], function(result){
-  if(result.titleKey != null){
-    document.querySelector('#File_1').textContent = result.titleKey;
+chrome.storage.sync.get(["titleKey"], function (result) {
+  if (result.titleKey != null) {
+    document.querySelector("#File_1").textContent = result.titleKey;
   }
 });
 
-
-function newFileFunction(){
-  document.getElementById("New File").addEventListener("click", async () =>{
-    let[tab] = await chrome.tabs.query({active:true, currentWindow: true});
+function newFileFunction() {
+  document.getElementById("New File").addEventListener("click", async () => {
+    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     window.location.href = "menu.html";
   });
 }
