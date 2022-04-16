@@ -27,9 +27,7 @@ function handleButtonClick() {
   chrome.storage.sync.get("url", ({ url }) => {
     //alert(url);
   });
-  chrome.storage.sync.get("summary", ({ summary }) => {
-    //alert(summary);
-  });
+  
 }
 
 document.addEventListener("DOMContentLoaded", documentEvents2, false);
@@ -39,17 +37,30 @@ function documentEvents2() {
     let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     // Store sync value before the script is executed.
     let title = document.getElementById("title").value;
-    chrome.storage.sync.set({ 'titleKey' : title}, function(){});
+    
+    chrome.storage.sync.get(["titleKey1"], function (result) {
+      if (result.titleKey1 == null) {
+        chrome.storage.sync.set({ 'titleKey1' : title}, function(){});
+      }
+      else{
+        chrome.storage.sync.get(['titleKey2'], function(result2){
+          if(result2.titleKey2 == null){
+              chrome.storage.sync.set({'titleKey2' : title}, function(){});
+          }
+          else{
+            chrome.storage.sync.get(['titleKey3'], function(result3){
+              chrome.storage.sync.set({'titleKey3' : title}, function(){});
+            });
+          }
+        });
+      }
+    });
+
     let url = document.getElementById("url").value;
     chrome.storage.sync.set({ url });
-    let summary = document.getElementById("summary").value;
-    chrome.storage.sync.set({ summary });
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
       function: handleButtonClick,
-    });
-    chrome.storage.sync.get(['titleKey'], function(result){
-      alert(result.titleKey);
     });
     window.location.href = "popup.html"; //opens new page after data is stored
   });
@@ -69,6 +80,5 @@ chrome.input.ime.onKeyEvent.addListener(
       return false;
     }
   }
-  
 );
 */

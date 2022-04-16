@@ -1,3 +1,24 @@
+
+chrome.storage.sync.get(['File_Name'], function(result){
+  let stringVar = result.File_Name;
+  if(stringVar == "titleKey1"){
+    chrome.storage.sync.get(["titleKey1"], function(result1){
+      document.getElementById("FileName").innerHTML = result1.titleKey1;
+    })
+  }
+  else if(stringVar == "titleKey2"){
+    chrome.storage.sync.get(["titleKey2"], function(result1){
+      document.getElementById("FileName").innerHTML = result1.titleKey2;
+    })
+  }
+  else{
+    chrome.storage.sync.get(["titleKey3"], function(result1){
+      document.getElementById("FileName").innerHTML = result1.titleKey3;
+    })
+  }
+});
+
+
 document.getElementById("subnote").addEventListener("click", async () => {
   let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
   let note = document.getElementById("addTxt").value;
